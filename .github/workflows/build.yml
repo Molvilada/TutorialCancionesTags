@@ -25,25 +25,29 @@ jobs:
           pip install -r requirements.txt
           pip install pyqt5
 
-      - name: Run tests
-        run: python -m coverage run -m unittest discover tests
-      
-      - name: Generate coverage XML report
-        run: python -m coverage xml -i
-      
-      - name: Display coverage report
-        run: python -m coverage report
-
-      - name: Check coverage file
+      - name: Run tests with coverage
         run: |
-          if [ ! -f coverage.xml ]; then
-            echo "Error: coverage.xml file was not created."
+          python -m coverage run -m unittest discover tests 
+          python -m coverage xml -i 
+          python -m coverage report
+
+      - name: Verify coverage file existence and size
+        run: |
+          if [ -f coverage.xml ]; then
+            echo "coverage.xml was created successfully."
+            if [ -s coverage.xml ]; then
+              echo "coverage.xml is not empty."
+            else
+              echo "Error: coverage.xml is empty."
+              exit 1
+            fi
+          else
+            echo "Error: coverage.xml was not created."
             exit 1
           fi
-          if [ ! -s coverage.xml ]; then
-            echo "Error: coverage.xml file is empty."
-            exit 1
-          fi
+
+      - name: Display coverage file content (for debugging)
+        run: cat coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

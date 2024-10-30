@@ -17,7 +17,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.13.0"
+          python-version: ${{ matrix.python }}
 
       - name: Install dependencies
         run: |
@@ -27,24 +27,12 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          python -m coverage run -m unittest discover tests 
-          python -m coverage xml -i 
+          python -m coverage run -m unittest discover tests
+          python -m coverage xml -i
           python -m coverage report
 
       - name: Display coverage file content (for debugging)
         run: cat coverage.xml
-
-      - name: Show path of coverage.xml
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Contents of current directory:"
-          ls -l
-          echo "Full path of coverage.xml:"
-          find "$(pwd)" -name "coverage.xml" -print
-
-      - name: Move coverage report to workspace
-        run: mv /home/runner/work/TutorialCancionesTags/TutorialCancionesTags/coverage.xml /github/workspace/coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

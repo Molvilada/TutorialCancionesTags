@@ -43,6 +43,9 @@ jobs:
           echo "Full path of coverage.xml:"
           find "$(pwd)" -name "coverage.xml" -print
 
+      - name: Move coverage report to workspace
+        run: mv /home/runner/work/TutorialCancionesTags/TutorialCancionesTags/coverage.xml /github/workspace/coverage.xml
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

@@ -8,8 +8,8 @@ omit =
 
 [paths]
 source =
-    src/
-    */site-packages/
+    src
+    */src
 
 [report]
 # Regexes for lines to exclude from consideration

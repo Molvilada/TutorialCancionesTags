@@ -2,6 +2,8 @@
 [run]
 branch = True
 source = src
+omit =
+    src/vista/*
 # omit = bad_file.py
 
 [paths]

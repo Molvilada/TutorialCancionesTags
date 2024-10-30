@@ -2,7 +2,7 @@
 [run]
 relative_files = True
 branch = True
-source = src
+source = src/
 omit =
     src/vista/*
     src/__main__.py

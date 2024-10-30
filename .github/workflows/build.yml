@@ -31,6 +31,17 @@ jobs:
           python -m coverage xml -i 
           python -m coverage report
 
+      - name: Check coverage file
+        run: |
+          if [ ! -f coverage.xml ]; then
+            echo "Error: coverage.xml file was not created."
+            exit 1
+          fi
+          if [ ! -s coverage.xml ]; then
+            echo "Error: coverage.xml file is empty."
+            exit 1
+          fi
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

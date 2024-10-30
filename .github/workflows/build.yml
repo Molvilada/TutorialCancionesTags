@@ -25,11 +25,14 @@ jobs:
           pip install -r requirements.txt
           pip install pyqt5
 
-      - name: Run tests with coverage
-        run: |
-          python -m coverage run -m unittest discover tests 
-          python -m coverage xml -i 
-          python -m coverage report
+      - name: Run tests
+        run: python -m coverage run -m unittest discover tests
+      
+      - name: Generate coverage XML report
+        run: python -m coverage xml -i
+      
+      - name: Display coverage report
+        run: python -m coverage report
 
       - name: Check coverage file
         run: |

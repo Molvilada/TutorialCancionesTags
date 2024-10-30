@@ -5,6 +5,7 @@ source = src
 omit =
     src/vista/*
     src/__main__.py
+    src/**/__init__.py
 # omit = bad_file.py
 
 [paths]

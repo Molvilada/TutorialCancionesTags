@@ -31,23 +31,17 @@ jobs:
           python -m coverage xml -i 
           python -m coverage report
 
-      - name: Verify coverage file existence and size
-        run: |
-          if [ -f coverage.xml ]; then
-            echo "coverage.xml was created successfully."
-            if [ -s coverage.xml ]; then
-              echo "coverage.xml is not empty."
-            else
-              echo "Error: coverage.xml is empty."
-              exit 1
-            fi
-          else
-            echo "Error: coverage.xml was not created."
-            exit 1
-          fi
-
       - name: Display coverage file content (for debugging)
         run: cat coverage.xml
+
+      - name: Show path of coverage.xml
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents of current directory:"
+          ls -l
+          echo "Full path of coverage.xml:"
+          find "$(pwd)" -name "coverage.xml" -print
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

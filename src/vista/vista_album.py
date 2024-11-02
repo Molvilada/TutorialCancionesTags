@@ -329,3 +329,18 @@ class Ventana_Album(QWidget):
         resultado = cursor.fetchall()
         conexion.close()
         return resultado
+
+    def obtener_album_por_titulo2(titulo):
+        """
+        Función que permite obtener un álbum por su título.
+        NOTA: Esta función contiene una vulnerabilidad de SQL Injection.
+        """
+        conexion = sqlite3.connect("mi_musica.db")
+        cursor = conexion.cursor()
+
+        consulta = f"SELECT * FROM albumes WHERE titulo = '{titulo}'"
+        cursor.execute(consulta)
+
+        resultado = cursor.fetchall()
+        conexion.close()
+        return resultado

@@ -315,64 +315,70 @@ class Ventana_Album(QWidget):
         self.interfaz.asociar_cancion(self.album_actual["id"], id_cancion)
         self.dialogo_agregar_cancion.close()
 
-    def obtener_album_por_titulo_1(titulo):
-        """
-        Función que permite obtener un álbum por su título.
-        NOTA: Esta función contiene una vulnerabilidad de SQL Injection.
-        """
-        conexion = sqlite3.connect("mi_musica.db")
-        cursor = conexion.cursor()
 
-        consulta = f"SELECT * FROM albumes WHERE titulo = '{titulo}'"
-        cursor.execute(consulta)
+def obtener_album_por_titulo_1(titulo):
+    """
+    Función que permite obtener un álbum por su título.
+    NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
+    """
+    conexion = sqlite3.connect("mi_musica.db")
+    cursor = conexion.cursor()
 
-        resultado = cursor.fetchall()
-        conexion.close()
-        return resultado
+    # Consulta de la base de datos sin manejo de errores
+    consulta = "SELECT * FROM albumes WHERE titulo = ?"
+    cursor.execute(consulta, (titulo,))
 
-    def obtener_album_por_titulo_2(titulo):
-        """
-        Función que permite obtener un álbum por su título.
-        NOTA: Esta función contiene una vulnerabilidad de SQL Injection.
-        """
-        conexion = sqlite3.connect("mi_musica.db")
-        cursor = conexion.cursor()
+    resultado = cursor.fetchall()
+    conexion.close()
+    return resultado
 
-        consulta = f"SELECT * FROM albumes WHERE titulo = '{titulo}'"
-        cursor.execute(consulta)
 
-        resultado = cursor.fetchall()
-        conexion.close()
-        return resultado
+def obtener_album_por_titulo_2(titulo):
+    """
+    Función que permite obtener un álbum por su título.
+    NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
+    """
+    conexion = sqlite3.connect("mi_musica.db")
+    cursor = conexion.cursor()
 
-    def obtener_album_por_titulo_3(titulo):
-        """
-        Función que permite obtener un álbum por su título.
-        NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
-        """
-        conexion = sqlite3.connect("mi_musica.db")
-        cursor = conexion.cursor()
+    # Consulta de la base de datos sin manejo de errores
+    consulta = "SELECT * FROM albumes WHERE titulo = ?"
+    cursor.execute(consulta, (titulo,))
 
-        # Consulta de la base de datos sin manejo de errores
-        consulta = "SELECT * FROM albumes WHERE titulo = ?"
-        cursor.execute(consulta, (titulo,))
+    resultado = cursor.fetchall()
+    conexion.close()
+    return resultado
 
-        resultado = cursor.fetchall()
-        conexion.close()
-        return resultado
 
-    def obtener_album_por_titulo_4(titulo):
-        """
-        Función que permite obtener un álbum por su título.
-        NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
-        """
-        conexion = sqlite3.connect("mi_musica.db")
-        cursor = conexion.cursor()
+def obtener_album_por_titulo_3(titulo):
+    """
+    Función que permite obtener un álbum por su título.
+    NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
+    """
+    conexion = sqlite3.connect("mi_musica.db")
+    cursor = conexion.cursor()
 
-        # Consulta de la base de datos sin manejo de errores
-        consulta = "SELECT * FROM albumes WHERE titulo = ?"
-        cursor.execute(consulta, (titulo,))
+    # Consulta de la base de datos sin manejo de errores
+    consulta = "SELECT * FROM albumes WHERE titulo = ?"
+    cursor.execute(consulta, (titulo,))
 
-        resultado = cursor.fetchall()
-        conexion.close()
-        return resultado
+    resultado = cursor.fetchall()
+    conexion.close()
+    return resultado
+
+
+def obtener_album_por_titulo_4(titulo):
+    """
+    Función que permite obtener un álbum por su título.
+    NOTA: Esta función no maneja excepciones de la base de datos, lo que puede causar fallos silenciosos.
+    """
+    conexion = sqlite3.connect("mi_musica.db")
+    cursor = conexion.cursor()
+
+    # Consulta de la base de datos sin manejo de errores
+    consulta = "SELECT * FROM albumes WHERE titulo = ?"
+    cursor.execute(consulta, (titulo,))
+
+    resultado = cursor.fetchall()
+    conexion.close()
+    return resultado
